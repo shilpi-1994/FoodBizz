@@ -2,8 +2,10 @@ import React from "react";
 import { RestaurantCard } from "./RestaurantCard";
 import ShimmerUI from "./ShimmerUI";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 export const Body = () => {
+  const onlineStatus = useOnlineStatus();
   const [listOfRestaurants, setListofRestaurants] = React.useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = React.useState([]);
   const [searchText, setSearchText] = React.useState("");
@@ -29,6 +31,8 @@ export const Body = () => {
   if (listOfRestaurants?.length === 0) {
     return <ShimmerUI />;
   }
+
+  if (onlineStatus === false) return <div>You are offline!!!</div>;
 
   return (
     <div className="body">
