@@ -3,7 +3,7 @@ import { RESTAURANT_LOGO } from "../utils/constants";
 
 export const RestaurantCard = (props) => {
   return (
-    <div className="res-card">
+    <div className="m-4 p-4 w-[200px] bg-slate-400 hover:bg-yellow-100">
       <img
         className="res-logo"
         src={RESTAURANT_LOGO + "/" + props.resData.cloudinaryImageId}
