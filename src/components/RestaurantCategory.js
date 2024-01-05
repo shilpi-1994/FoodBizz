@@ -4,7 +4,7 @@ const RestaurantCategory = (category) => {
   return (
     <div>
       <div className="w-6/12 mx-auto my-4 bg-gray-50 shadow-lg p-4 flex justify-between">
-        <span className="font-bold text-lg">
+        <span className="font-bold text-lg text-pink-700">
           {category?.category?.title} ({category?.category?.itemCards?.length})
         </span>
         <span>⬇️</span>
