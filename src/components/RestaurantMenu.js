@@ -1,22 +1,34 @@
 import React from "react";
 import ShimmerUI from "./ShimmerUI";
 import { useParams } from "react-router-dom";
+import RestaurantCategory from "./RestaurantCategory";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
-  const resInfo = useRestaurantMenu(resId);
+  const { resInfo, categories } = useRestaurantMenu(resId);
   if (!resInfo) return <ShimmerUI />;
 
+  const filteredCategories =
+    categories?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+      (ele) =>
+        ele?.card?.card?.["@type"] ===
+        "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+    );
+
   return (
-    <div className="menu">
-      <h1>{resInfo?.name}</h1>
-      <p>
+    <div className="text-center">
+      <h1 className="font-bold my-6 text-2xl">{resInfo?.name}</h1>
+      <div className="font-bold text-lg text-violet-800">
         {resInfo?.cuisines?.join(", ")} - {resInfo?.costForTwoMessage}
-      </p>
-      <div>{resInfo?.totalRatingsString}</div>
+      </div>
+      <div className="font-bold">{resInfo?.totalRatingsString}</div>
       <div>{resInfo?.sla?.slaString.toLowerCase()}</div>
       <p>{resInfo?.city}</p>
+      <br />
+      {filteredCategories?.map((ele) => (
+        <RestaurantCategory category={ele?.card?.card} />
+      ))}
     </div>
   );
 };

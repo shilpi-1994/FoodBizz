@@ -11,8 +11,6 @@ export const Body = () => {
   const [searchText, setSearchText] = React.useState("");
   const RestaurantCardPromoted = withPromotionLabel(RestaurantCard);
 
-  console.log("listOfRestaurants", listOfRestaurants);
-
   React.useEffect(() => {
     fetchData();
   }, []);

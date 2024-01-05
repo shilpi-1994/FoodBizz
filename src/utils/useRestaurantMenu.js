@@ -2,6 +2,7 @@ import React from "react";
 
 const useRestaurantMenu = (resId) => {
   const [resInfo, setResInfo] = React.useState({});
+  const [categories, setCategories] = React.useState({});
   React.useEffect(() => {
     fetchMenu();
   }, []);
@@ -15,8 +16,9 @@ const useRestaurantMenu = (resId) => {
 
     const parsedData = await resData?.json();
     setResInfo(parsedData?.data?.cards?.[0]?.card?.card?.info);
+    setCategories(parsedData?.data?.cards?.[2]);
   };
-  return resInfo;
+  return { resInfo, categories };
 };
 
 export default useRestaurantMenu;
