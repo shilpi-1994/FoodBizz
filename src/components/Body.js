@@ -22,7 +22,7 @@ export const Body = () => {
 
     const parsedData = await data.json();
     const parsedRestaurants =
-      parsedData?.data?.cards[4].card.card.gridElements.infoWithStyle
+      parsedData?.data?.cards[2].card.card.gridElements.infoWithStyle
         .restaurants;
 
     setListofRestaurants(parsedRestaurants);
