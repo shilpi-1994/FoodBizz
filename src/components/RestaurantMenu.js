@@ -7,6 +7,8 @@ import useRestaurantMenu from "../utils/useRestaurantMenu";
 const RestaurantMenu = () => {
   const { resId } = useParams();
   const { resInfo, categories } = useRestaurantMenu(resId);
+  const [showIndex, setShowIndex] = React.useState(0);
+
   if (!resInfo) return <ShimmerUI />;
 
   const filteredCategories =
@@ -26,8 +28,13 @@ const RestaurantMenu = () => {
       <div>{resInfo?.sla?.slaString.toLowerCase()}</div>
       <p>{resInfo?.city}</p>
       <br />
-      {filteredCategories?.map((ele) => (
-        <RestaurantCategory category={ele?.card?.card} />
+      {filteredCategories?.map((ele, index) => (
+        <RestaurantCategory
+          key={index}
+          category={ele?.card?.card}
+          showItems={index === showIndex ? true : false}
+          setShowIndex={() => setShowIndex(index)}
+        />
       ))}
     </div>
   );

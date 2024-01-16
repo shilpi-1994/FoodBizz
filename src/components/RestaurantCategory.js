@@ -1,13 +1,10 @@
 import React from "react";
 import ItemList from "./ItemList";
 
-const RestaurantCategory = (category) => {
-  const [showItems, setShowItems] = React.useState(false);
-
+const RestaurantCategory = ({ category, showItems, setShowIndex }) => {
   const handleClick = () => {
-    setShowItems(!showItems);
+    setShowIndex();
   };
-
   return (
     <div>
       <div className="w-6/12 mx-auto my-4 bg-gray-50 shadow-lg p-4">
@@ -16,12 +13,11 @@ const RestaurantCategory = (category) => {
           onClick={handleClick}
         >
           <span className="font-bold text-lg text-pink-700">
-            {category?.category?.title} ({category?.category?.itemCards?.length}
-            )
+            {category?.title} ({category?.itemCards?.length})
           </span>
           <span>⬇️</span>
         </div>
-        {showItems && <ItemList items={category?.category?.itemCards} />}
+        {showItems && <ItemList items={category?.itemCards} />}
       </div>
     </div>
   );
