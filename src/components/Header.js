@@ -1,10 +1,12 @@
-import React from "react";
+import { React, useContext } from "react";
 import { APP_LOGO } from "../utils/constants";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/userContext";
 
 export const Header = () => {
   const onlineStatus = useOnlineStatus();
+  const { loggedInUser } = useContext(UserContext);
 
   return (
     <div className="flex justify-between shadow-lg m-2">
@@ -29,7 +31,10 @@ export const Header = () => {
             <Link to="/grocery">Grocery</Link>
           </li>
           <li className="px-4">Cart</li>
-          <button className="login">Login</button>
+          <button className="login">
+            Login -{" "}
+            <span className="font-extrabold uppercase">{loggedInUser}</span>
+          </button>
         </ul>
       </div>
     </div>
