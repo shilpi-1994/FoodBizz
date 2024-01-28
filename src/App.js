@@ -8,13 +8,29 @@ import RestaurantMenu from "./components/RestaurantMenu";
 import Error from "./components/Error";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import "../index.css";
+import UserContext from "./utils/userContext";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
 
 const AppLayout = () => {
+  const [userName, setUserName] = React.useState();
+
+  React.useEffect(() => {
+    const data = {
+      name: "Arjun Dev",
+    };
+    setUserName(data.name);
+  }, []);
+
   return (
-    <div className="app">
-      <Header />
-      <Outlet />
-    </div>
+    <Provider store={appStore}>
+      <UserContext.Provider value={{ loggedInUser: userName }}>
+        <div className="app">
+          <Header />
+          <Outlet />
+        </div>
+      </UserContext.Provider>
+    </Provider>
   );
 };
 
